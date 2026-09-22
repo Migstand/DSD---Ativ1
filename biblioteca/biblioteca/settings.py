@@ -41,7 +41,15 @@ INSTALLED_APPS = [
 	'livros', # o app que você criou
 	'rest_framework_simplejwt', #usar JWT e Swagger depois, já pode incluir
 	'drf_yasg',
+	#'corsheaders',
 ]
+
+#CORS_ALLOWED_ORIGINS = [
+#	"http://localhost:3000",
+#	"https://meusite.com",
+#]
+
+# CORS_ALLOW_ALL_ORIGINS = True # Por enquanto só para testes
 
 SWAGGER_SETTINGS = {
     'SECURITY_DEFINITIONS': {
@@ -52,6 +60,16 @@ SWAGGER_SETTINGS = {
             'description': 'JWT Authorization. Use o formato: Bearer <seu_token>'
         }
     }
+}
+
+REST_FRAMEWORK = {
+	'DEFAULT_AUTHENTICATION_CLASSES': [
+	'rest_framework_simplejwt.authentication.JWTAuthentication',
+	# or 'rest_framework.authentication.TokenAuthentication',
+	],
+	'DEFAULT_PERMISSION_CLASSES': [
+		'rest_framework.permissions.IsAuthenticated',
+	],
 }
 
 MIDDLEWARE = [

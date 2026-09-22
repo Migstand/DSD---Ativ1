@@ -7,7 +7,9 @@ class AutorSerializer(serializers.ModelSerializer):
 		fields = ['id', 'nome', 'nacionalidade']
 
 class LivroSerializer(serializers.ModelSerializer):
-	autor = AutorSerializer(read_only=True)
+	autor = serializers.PrimaryKeyRelatedField(
+        	queryset=Autor.objects.all()
+    	)
 	class Meta:
 		model = Livro
 		fields = ['id', 'titulo', 'ano_publicacao', 'autor']
